@@ -3,7 +3,7 @@ $out_dir = "build";
 $aux_dir = "build";
 
 $pdf_previewer = "none";
-$jobname = "Lab2";
+$jobname = "Lab1";
 
 # --- Clean up temporary files after successful build ---
 $cleanup_includes_cusdep_generated = 1;
