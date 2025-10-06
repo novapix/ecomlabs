@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SHOPLITE - Lab 3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <div class="top-bar">
+        <div class="logo">
+            <div class="logo-icon">🛍️</div>
+            <span>SHOPLITE</span>
+        </div>
+        <div class="nav-items">
+            <a href="#">Home</a>
+            <a href="#">Products</a>
+            <a href="#">Categories</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <span class="cart-total">Cart Total: NPR <span id="total-price">0</span> (<span id="total-items">0</span> items)</span>
+        </div>
+        <div class="search-section">
+            <input type="text" placeholder="Search products..." id="searchInput">
+            <button onclick="searchProducts()">🔍</button>
+        </div>
+    </div>
+
+    <div class="status-bar">
+        <div>
+            <a href="#">Sign In</a>
+            <span>|</span>
+            <a href="#">Register</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="main-content">
+            <p class="store-subtitle">Discover quality products curated just for you</p>
+
+            <div class="cart-section" id="cart-section" style="display: none;">
+                <h2>🛒 Shopping Cart</h2>
+                <div class="cart-items-container" id="cart-items-container">
+                </div>
+                <div class="cart-summary">
+                    <div class="cart-totals">
+                        <div class="subtotal">Subtotal: NPR <span id="cart-subtotal">0</span></div>
+                        <div class="tax">Tax (13%): NPR <span id="cart-tax">0</span></div>
+                        <div class="shipping">Shipping: NPR <span id="cart-shipping">0</span></div>
+                        <div class="final-total">Total: NPR <span id="cart-final-total">0</span></div>
+                    </div>
+                    <div class="cart-actions">
+                        <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+                        <button class="checkout-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card" data-category="electronics" data-product-id="1">
+                    <div class="product-image">
+                        <img src="assets/1-Premium_Headphones.jpg" alt="Wireless Headphones">
+                        <div class="product-badge">NEW</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Premium Headphones</h3>
+                        <p class="product-desc">High-quality wireless headphones with noise cancellation</p>
+                        <div class="price-section">
+                            <div class="price-tag" data-original-price="8999">NPR 8,999</div>
+                            <div class="discount-info" style="display: none;">
+                                <span class="discount-percent"></span>
+                                <span class="savings-amount"></span>
+                            </div>
+                        </div>
+                        <div class="quantity-section">
+                            <label>Quantity:</label>
+                            <div class="quantity-selector">
+                                <button class="qty-btn minus" onclick="changeQuantity(this, -1)">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" onchange="updateProductTotal(this)">
+                                <button class="qty-btn plus" onclick="changeQuantity(this, 1)">+</button>
+                            </div>
+                            <div class="product-total">Total: NPR <span class="total-amount">8,999</span></div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-cart-btn" data-price="8999" onclick="addToCart(this)">Add to Cart</button>
+                            <button class="details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="fashion" data-product-id="2">
+                    <div class="product-image">
+                        <img src="assets/2-Sport_Sneakers.jpg" alt="Running Shoes">
+                        <div class="product-badge sale">SALE</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Sport Sneakers</h3>
+                        <p class="product-desc">Comfortable running shoes perfect for daily workouts</p>
+                        <div class="price-section">
+                            <div class="price-tag" data-original-price="6999" data-sale-price="4599">
+                                NPR 4,599 <span class="old-price">NPR 6,999</span>
+                            </div>
+                            <div class="discount-info">
+                                <span class="discount-percent">34% OFF</span>
+                                <span class="savings-amount">Save NPR 2,400</span>
+                            </div>
+                        </div>
+                        <div class="quantity-section">
+                            <label>Quantity:</label>
+                            <div class="quantity-selector">
+                                <button class="qty-btn minus" onclick="changeQuantity(this, -1)">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" onchange="updateProductTotal(this)">
+                                <button class="qty-btn plus" onclick="changeQuantity(this, 1)">+</button>
+                            </div>
+                            <div class="product-total">Total: NPR <span class="total-amount">4,599</span></div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-cart-btn" data-price="4599" onclick="addToCart(this)">Add to Cart</button>
+                            <button class="details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="electronics" data-product-id="3">
+                    <div class="product-image">
+                        <img src="assets/3-Smart_Watch_Pro.jpg" alt="Smart Watch">
+                        <div class="product-badge trending">HOT</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Smart Watch Pro</h3>
+                        <p class="product-desc">Advanced fitness tracking with heart rate monitor</p>
+                        <div class="price-section">
+                            <div class="price-tag" data-original-price="12999">NPR 12,999</div>
+                            <div class="discount-info" style="display: none;">
+                                <span class="discount-percent"></span>
+                                <span class="savings-amount"></span>
+                            </div>
+                        </div>
+                        <div class="quantity-section">
+                            <label>Quantity:</label>
+                            <div class="quantity-selector">
+                                <button class="qty-btn minus" onclick="changeQuantity(this, -1)">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" onchange="updateProductTotal(this)">
+                                <button class="qty-btn plus" onclick="changeQuantity(this, 1)">+</button>
+                            </div>
+                            <div class="product-total">Total: NPR <span class="total-amount">12,999</span></div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-cart-btn" data-price="12999" onclick="addToCart(this)">Add to Cart</button>
+                            <button class="details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="accessories" data-product-id="4">
+                    <div class="product-image">
+                        <img src="assets/4-Leather_Handbag.jpg" alt="Leather Bag">
+                    </div>
+                    <div class="product-info">
+                        <h3>Leather Handbag</h3>
+                        <p class="product-desc">Premium genuine leather bag with elegant design</p>
+                        <div class="price-section">
+                            <div class="price-tag" data-original-price="7499">NPR 7,499</div>
+                            <div class="discount-info" style="display: none;">
+                                <span class="discount-percent"></span>
+                                <span class="savings-amount"></span>
+                            </div>
+                        </div>
+                        <div class="quantity-section">
+                            <label>Quantity:</label>
+                            <div class="quantity-selector">
+                                <button class="qty-btn minus" onclick="changeQuantity(this, -1)">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" onchange="updateProductTotal(this)">
+                                <button class="qty-btn plus" onclick="changeQuantity(this, 1)">+</button>
+                            </div>
+                            <div class="product-total">Total: NPR <span class="total-amount">7,499</span></div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-cart-btn" data-price="7499" onclick="addToCart(this)">Add to Cart</button>
+                            <button class="details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="electronics" data-product-id="5">
+                    <div class="product-image">
+                        <img src="assets/5-Gaming_Laptop.jpg" alt="Gaming Laptop">
+                        <div class="product-badge">NEW</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Gaming Laptop</h3>
+                        <p class="product-desc">High-performance laptop for gaming and professional work</p>
+                        <div class="price-section">
+                            <div class="price-tag" data-original-price="89999">NPR 89,999</div>
+                            <div class="discount-info" style="display: none;">
+                                <span class="discount-percent"></span>
+                                <span class="savings-amount"></span>
+                            </div>
+                        </div>
+                        <div class="quantity-section">
+                            <label>Quantity:</label>
+                            <div class="quantity-selector">
+                                <button class="qty-btn minus" onclick="changeQuantity(this, -1)">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" onchange="updateProductTotal(this)">
+                                <button class="qty-btn plus" onclick="changeQuantity(this, 1)">+</button>
+                            </div>
+                            <div class="product-total">Total: NPR <span class="total-amount">89,999</span></div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-cart-btn" data-price="89999" onclick="addToCart(this)">Add to Cart</button>
+                            <button class="details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="fashion" data-product-id="6">
+                    <div class="product-image">
+                        <img src="assets/6-Casual_Cotton_Shirt.jpg" alt="Casual Shirt">
+                        <div class="product-badge sale">SALE</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Casual Cotton Shirt</h3>
+                        <p class="product-desc">Comfortable cotton shirt perfect for daily wear</p>
+                        <div class="price-section">
+                            <div class="price-tag" data-original-price="2499" data-sale-price="1899">
+                                NPR 1,899 <span class="old-price">NPR 2,499</span>
+                            </div>
+                            <div class="discount-info">
+                                <span class="discount-percent">24% OFF</span>
+                                <span class="savings-amount">Save NPR 600</span>
+                            </div>
+                        </div>
+                        <div class="quantity-section">
+                            <label>Quantity:</label>
+                            <div class="quantity-selector">
+                                <button class="qty-btn minus" onclick="changeQuantity(this, -1)">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" onchange="updateProductTotal(this)">
+                                <button class="qty-btn plus" onclick="changeQuantity(this, 1)">+</button>
+                            </div>
+                            <div class="product-total">Total: NPR <span class="total-amount">1,899</span></div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-cart-btn" data-price="1899" onclick="addToCart(this)">Add to Cart</button>
+                            <button class="details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="home" data-product-id="7">
+                    <div class="product-image">
+                        <img src="assets/7-Electric_Coffee_Maker.jpg" alt="Coffee Maker">
+                        <div class="product-badge trending">HOT</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Electric Coffee Maker</h3>
+                        <p class="product-desc">Automatic coffee maker with programmable timer</p>
+                        <div class="price-section">
+                            <div class="price-tag" data-original-price="5999">NPR 5,999</div>
+                            <div class="discount-info" style="display: none;">
+                                <span class="discount-percent"></span>
+                                <span class="savings-amount"></span>
+                            </div>
+                        </div>
+                        <div class="quantity-section">
+                            <label>Quantity:</label>
+                            <div class="quantity-selector">
+                                <button class="qty-btn minus" onclick="changeQuantity(this, -1)">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" onchange="updateProductTotal(this)">
+                                <button class="qty-btn plus" onclick="changeQuantity(this, 1)">+</button>
+                            </div>
+                            <div class="product-total">Total: NPR <span class="total-amount">5,999</span></div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-cart-btn" data-price="5999" onclick="addToCart(this)">Add to Cart</button>
+                            <button class="details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="accessories" data-product-id="8">
+                    <div class="product-image">
+                        <img src="assets/8-Designer_Sunglasses.jpg" alt="Sunglasses">
+                    </div>
+                    <div class="product-info">
+                        <h3>Designer Sunglasses</h3>
+                        <p class="product-desc">UV protection sunglasses with polarized lenses</p>
+                        <div class="price-section">
+                            <div class="price-tag" data-original-price="3999">NPR 3,999</div>
+                            <div class="discount-info" style="display: none;">
+                                <span class="discount-percent"></span>
+                                <span class="savings-amount"></span>
+                            </div>
+                        </div>
+                        <div class="quantity-section">
+                            <label>Quantity:</label>
+                            <div class="quantity-selector">
+                                <button class="qty-btn minus" onclick="changeQuantity(this, -1)">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" onchange="updateProductTotal(this)">
+                                <button class="qty-btn plus" onclick="changeQuantity(this, 1)">+</button>
+                            </div>
+                            <div class="product-total">Total: NPR <span class="total-amount">3,999</span></div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-cart-btn" data-price="3999" onclick="addToCart(this)">Add to Cart</button>
+                            <button class="details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="electronics" data-product-id="9">
+                    <div class="product-image">
+                        <img src="assets/9-Latest_Smartphone.jpg" alt="Smartphone">
+                        <div class="product-badge">NEW</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Latest Smartphone</h3>
+                        <p class="product-desc">5G enabled smartphone with triple camera system</p>
+                        <div class="price-section">
+                            <div class="price-tag" data-original-price="45999">NPR 45,999</div>
+                            <div class="discount-info" style="display: none;">
+                                <span class="discount-percent"></span>
+                                <span class="savings-amount"></span>
+                            </div>
+                        </div>
+                        <div class="quantity-section">
+                            <label>Quantity:</label>
+                            <div class="quantity-selector">
+                                <button class="qty-btn minus" onclick="changeQuantity(this, -1)">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" onchange="updateProductTotal(this)">
+                                <button class="qty-btn plus" onclick="changeQuantity(this, 1)">+</button>
+                            </div>
+                            <div class="product-total">Total: NPR <span class="total-amount">45,999</span></div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-cart-btn" data-price="45999" onclick="addToCart(this)">Add to Cart</button>
+                            <button class="details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="home" data-product-id="10">
+                    <div class="product-image">
+                        <img src="assets/10-LED_Table_Lamp.jpg" alt="Table Lamp">
+                        <div class="product-badge sale">SALE</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>LED Table Lamp</h3>
+                        <p class="product-desc">Adjustable LED desk lamp with USB charging port</p>
+                        <div class="price-section">
+                            <div class="price-tag" data-original-price="2999" data-sale-price="2299">
+                                NPR 2,299 <span class="old-price">NPR 2,999</span>
+                            </div>
+                            <div class="discount-info">
+                                <span class="discount-percent">23% OFF</span>
+                                <span class="savings-amount">Save NPR 700</span>
+                            </div>
+                        </div>
+                        <div class="quantity-section">
+                            <label>Quantity:</label>
+                            <div class="quantity-selector">
+                                <button class="qty-btn minus" onclick="changeQuantity(this, -1)">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" onchange="updateProductTotal(this)">
+                                <button class="qty-btn plus" onclick="changeQuantity(this, 1)">+</button>
+                            </div>
+                            <div class="product-total">Total: NPR <span class="total-amount">2,299</span></div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-cart-btn" data-price="2299" onclick="addToCart(this)">Add to Cart</button>
+                            <button class="details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="fashion" data-product-id="11">
+                    <div class="product-image">
+                        <img src="assets/11-Winter_Jacket.jpg" alt="Winter Jacket">
+                        <div class="product-badge trending">HOT</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Winter Jacket</h3>
+                        <p class="product-desc">Waterproof winter jacket with thermal insulation</p>
+                        <div class="price-section">
+                            <div class="price-tag" data-original-price="8499">NPR 8,499</div>
+                            <div class="discount-info" style="display: none;">
+                                <span class="discount-percent"></span>
+                                <span class="savings-amount"></span>
+                            </div>
+                        </div>
+                        <div class="quantity-section">
+                            <label>Quantity:</label>
+                            <div class="quantity-selector">
+                                <button class="qty-btn minus" onclick="changeQuantity(this, -1)">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" onchange="updateProductTotal(this)">
+                                <button class="qty-btn plus" onclick="changeQuantity(this, 1)">+</button>
+                            </div>
+                            <div class="product-total">Total: NPR <span class="total-amount">8,499</span></div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-cart-btn" data-price="8499" onclick="addToCart(this)">Add to Cart</button>
+                            <button class="details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="accessories" data-product-id="12">
+                    <div class="product-image">
+                        <img src="assets/12-Wireless_Charger.jpg" alt="Wireless Charger">
+                    </div>
+                    <div class="product-info">
+                        <h3>Wireless Charger</h3>
+                        <p class="product-desc">Fast wireless charging pad compatible with all devices</p>
+                        <div class="price-section">
+                            <div class="price-tag" data-original-price="1999">NPR 1,999</div>
+                            <div class="discount-info" style="display: none;">
+                                <span class="discount-percent"></span>
+                                <span class="savings-amount"></span>
+                            </div>
+                        </div>
+                        <div class="quantity-section">
+                            <label>Quantity:</label>
+                            <div class="quantity-selector">
+                                <button class="qty-btn minus" onclick="changeQuantity(this, -1)">-</button>
+                                <input type="number" class="qty-input" value="1" min="1" max="10" onchange="updateProductTotal(this)">
+                                <button class="qty-btn plus" onclick="changeQuantity(this, 1)">+</button>
+                            </div>
+                            <div class="product-total">Total: NPR <span class="total-amount">1,999</span></div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-cart-btn" data-price="1999" onclick="addToCart(this)">Add to Cart</button>
+                            <button class="details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar with Cart Toggle -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3>🏷️ Categories</h3>
+            </div>
+            <ul class="category-list">
+                <li class="active" data-filter="all">All Products</li>
+                <li data-filter="electronics">Electronics</li>
+                <li data-filter="fashion">Fashion</li>
+                <li data-filter="accessories">Accessories</li>
+                <li data-filter="home">Home & Living</li>
+            </ul>
+
+            <div class="sidebar-section">
+                <h3>🛒 Cart Management</h3>
+                <button class="toggle-cart-btn" onclick="toggleCartDisplay()">View Cart</button>
+                <div class="cart-info">
+                    <p>Items in Cart: <span id="sidebar-cart-count">0</span></p>
+                    <p>Cart Total: NPR <span id="sidebar-cart-total">0</span></p>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Popular Brands</h3>
+                <div class="brand-tags">
+                    <span class="brand-tag">Apple</span>
+                    <span class="brand-tag">Nike</span>
+                    <span class="brand-tag">Samsung</span>
+                    <span class="brand-tag">Adidas</span>
+                    <span class="brand-tag">Sony</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification hidden">
+        <span id="notification-text"></span>
+        <button onclick="hideNotification()">x</button>
+    </div>
+
+    <!-- Cart Overlay is created dynamically by JavaScript -->
+
+    <script src="script.js"></script>
+</body>
+</html>
