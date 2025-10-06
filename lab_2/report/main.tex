@@ -28,6 +28,15 @@
 \tcbuselibrary{minted, listingsutf8}
 \setminted{breaklines}
 
+\usepackage{hyperref}
+\hypersetup{
+  pdfauthor={Parakram},
+  pdftitle={Lab 1 Report: HTML/CSS-based Product Catalog},
+  pdfsubject={Ecommerce},
+  pdfcreator={Parakram},      
+  pdfproducer={pdfLaTeX}  
+}
+
 \newtcblisting{code}[2][]{%
   listing engine=minted,
   colback=white,
@@ -83,7 +92,6 @@ Affiliated to Tribhuvan University}
 \begin{document}
 % \date{August 17, 2025}
 
-% --------- Cover Page ---------
 \begin{titlepage}
   \begin{center}
     \vspace*{2cm}
@@ -98,7 +106,7 @@ Affiliated to Tribhuvan University}
 
     \textit{Kathford International College of Engineering and Management} \\
     Affiliated to Tribhuvan University \\[3cm]
-    
+
     \date{August 23, 2025}
     {\normalsize \@date}
     % \today
@@ -116,15 +124,15 @@ To implement product price display, simple calculations, and interactive UI elem
 
 \section*{2. Tools and Technologies Used}
 \begin{longtable}{ll}
-\toprule
-\textbf{Technology} & \textbf{Purpose} \\
-\midrule
-HTML5 & Structure and semantic markup for product displays \\
-CSS3 & Styling, animations, and responsive design \\
-JavaScript & Price calculations and interactive functionality \\
-VS Code & Code editor and development environment \\
-Web Browser Developer Tools & Debugging and performance testing \\
-\bottomrule
+  \toprule
+  \textbf{Technology}         & \textbf{Purpose}                                   \\
+  \midrule
+  HTML5                       & Structure and semantic markup for product displays \\
+  CSS3                        & Styling, animations, and responsive design         \\
+  JavaScript                  & Price calculations and interactive functionality   \\
+  VS Code                     & Code editor and development environment            \\
+  Web Browser Developer Tools & Debugging and performance testing                  \\
+  \bottomrule
 \end{longtable}
 
 \section*{3. Theory / Background}
@@ -134,23 +142,23 @@ In this lab, JavaScript is used to enhance the product catalog by implementing i
 
 \section*{4. Page Layout Design}
 \subsection*{4.1 Product Card Structure}
-Each interactive product card now contains the following: 
+Each interactive product card now contains the following:
 \begin{itemize}
   \item Product Image with dynamic badges (NEW, SALE, HOT)
   \item Product Title and Description
   \item Enhanced Price Section with:
-    \begin{itemize}
-      \item Current price display with proper formatting
-      \item Original price with strike through for sale items
-      \item Automatic discount percentage calculation
-      \item Savings amount display
-    \end{itemize}
+        \begin{itemize}
+          \item Current price display with proper formatting
+          \item Original price with strike through for sale items
+          \item Automatic discount percentage calculation
+          \item Savings amount display
+        \end{itemize}
   \item Interactive Quantity Section featuring:
-    \begin{itemize}
-      \item Increment/decrement buttons with validation
-      \item Number input field (1--10 range)
-      \item Real-time total calculation display
-    \end{itemize}
+        \begin{itemize}
+          \item Increment/decrement buttons with validation
+          \item Number input field (1--10 range)
+          \item Real-time total calculation display
+        \end{itemize}
   \item Action buttons with visual feedback
 \end{itemize}
 
@@ -178,121 +186,121 @@ Each interactive product card now contains the following:
 \subsection*{5.1 HTML Code: Product Card with Interactive Elements}
 % chktex-file 8
 \begin{code}[fontsize=\small]{html}
-<div class='product-card' data-category='electronics'>
-    <div class='product-image'>
-        <img src='images/headphone.jpg' alt='Wireless Headphones'>
-        <div class='product-badge'>NEW</div>
-    </div>
-    <div class='product-info'>
-        <h3>Premium Headphones</h3>
-        <p class='product-desc'>
-            High-quality wireless headphones with noise cancellation
-        </p>
-        <div class='price-section'>
-            <div class='price-tag' data-original-price='8999'>NPR 8,999</div>
-            <div class='discount-info' style='display: none;'>
-                <span class='discount-percent'></span>
-                <span class='savings-amount'></span>
-            </div>
-        </div>
-        <div class='quantity-section'>
-            <label>Quantity:</label>
-            <div class='quantity-selector'>
-                <button class='qty-btn minus' onclick='changeQuantity(this, -1)'> - </button>
-                <input type='number' class='qty-input' value='1' min='1' max='10' onchange='updateProductTotal(this)'>
-                <button class='qty-btn plus' onclick='changeQuantity(this, 1)'>+</button>
-            </div>
-            <div class='product-total'>
-                Total: NPR <span class='total-amount'>8,999</span>
-            </div>
-        </div>
-        <div class='product-actions'>
-            <button class='select-btn' data-price='8999'>Select Item</button>
-            <button class='details-btn'>View Details</button>
-        </div>
-    </div>
-</div>
+  <div class='product-card' data-category='electronics'>
+  <div class='product-image'>
+  <img src='images/headphone.jpg' alt='Wireless Headphones'>
+  <div class='product-badge'>NEW</div>
+  </div>
+  <div class='product-info'>
+  <h3>Premium Headphones</h3>
+  <p class='product-desc'>
+  High-quality wireless headphones with noise cancellation
+  </p>
+  <div class='price-section'>
+  <div class='price-tag' data-original-price='8999'>NPR 8,999</div>
+  <div class='discount-info' style='display: none;'>
+  <span class='discount-percent'></span>
+  <span class='savings-amount'></span>
+  </div>
+  </div>
+  <div class='quantity-section'>
+  <label>Quantity:</label>
+  <div class='quantity-selector'>
+  <button class='qty-btn minus' onclick='changeQuantity(this, -1)'> - </button>
+  <input type='number' class='qty-input' value='1' min='1' max='10' onchange='updateProductTotal(this)'>
+  <button class='qty-btn plus' onclick='changeQuantity(this, 1)'>+</button>
+  </div>
+  <div class='product-total'>
+  Total: NPR <span class='total-amount'>8,999</span>
+  </div>
+  </div>
+  <div class='product-actions'>
+  <button class='select-btn' data-price='8999'>Select Item</button>
+  <button class='details-btn'>View Details</button>
+  </div>
+  </div>
+  </div>
 \end{code}
 
 \subsection*{5.2 JavaScript Code: Price Formatting Functions}
 \begin{code}[fontsize=\small]{javascript}
-function formatPrice (price) {
-    return price.toLocaleString('en-NP');
-}
+  function formatPrice (price) {
+      return price.toLocaleString('en-NP');
+    }
 
-function formatCurrency (amount) {
-    return `NPR ${formatPrice(amount)}`;
-}
+  function formatCurrency (amount) {
+      return `NPR ${formatPrice(amount)}`;
+    }
 \end{code}
 
 \subsection*{5.3 JavaScript Code: Discount Calculation}
 \begin{code}[fontsize=\small]{javascript}
-function calculateDiscount(originalPrice, salePrice) {
-    const discount = originalPrice - salePrice;
-    const discountPercent = Math.round((discount / originalPrice) * 100);
-    return {
-        percent: discountPercent,
-        amount: discount,
-        savings: formatCurrency(discount)
-    };
-}
+  function calculateDiscount(originalPrice, salePrice) {
+      const discount = originalPrice - salePrice;
+      const discountPercent = Math.round((discount / originalPrice) * 100);
+      return {
+          percent: discountPercent,
+          amount: discount,
+          savings: formatCurrency(discount)
+        };
+    }
 \end{code}
 
 \subsection*{5.4 JavaScript Code: Quantity Management}
 \begin{code}[fontsize=\small]{javascript}
-function changeQuantity(button, change) {
-    const qtyInput = button.parentNode.querySelector('.qty-input');
-    const currentValue = parseInt(qtyInput.value);
-    const newValue = currentValue + change;
+  function changeQuantity(button, change) {
+      const qtyInput = button.parentNode.querySelector('.qty-input');
+      const currentValue = parseInt(qtyInput.value);
+      const newValue = currentValue + change;
 
-    if (newValue >= 1 && newValue <= 10) {
-        qtyInput.value = newValue;
-        updateProductTotal(qtyInput);
+      if (newValue >= 1 && newValue <= 10) {
+          qtyInput.value = newValue;
+          updateProductTotal(qtyInput);
+        }
     }
-}
 
-function updateProductTotal(input) {
-    const quantity = parseInt(input.value);
-    const productCard = input.closest('.product-card');
-    const priceTag = productCard.querySelector('.price-tag');
-    const originalPrice = parseInt(priceTag.getAttribute('data-original-price'));
+  function updateProductTotal(input) {
+      const quantity = parseInt(input.value);
+      const productCard = input.closest('.product-card');
+      const priceTag = productCard.querySelector('.price-tag');
+      const originalPrice = parseInt(priceTag.getAttribute('data-original-price'));
 
-    const totalAmount = originalPrice * quantity;
-    const totalAmountElement = productCard.querySelector('.total-amount');
-    totalAmountElement.textContent = formatPrice(totalAmount);
-}
+      const totalAmount = originalPrice * quantity;
+      const totalAmountElement = productCard.querySelector('.total-amount');
+      totalAmountElement.textContent = formatPrice(totalAmount);
+    }
 \end{code}
 
 \subsection*{5.5 JavaScript Code: Interactive UI Elements}
 \begin{code}[fontsize=\small]{javascript}
-function selectItem(productName, quantity, button) {
-    selectedItemsCount++;
-    updateItemsDisplay();
-    showButtonFeedback(button);
+  function selectItem(productName, quantity, button) {
+      selectedItemsCount++;
+      updateItemsDisplay();
+      showButtonFeedback(button);
 
-    const quantityText = quantity > 1 ? ` (x${quantity})` : '';
-    showNotification(`${productName}${quantityText} selected!`);
-}
+      const quantityText = quantity > 1 ? ` (x${quantity})` : '';
+        showNotification(`${productName}${quantityText} selected!`);
+    }
 
-function showButtonFeedback(button) {
-    const originalText = button.textContent;
-    button.textContent = '✓ Selected!';
-    button.style.background = 'linear-gradient(135deg, #48bb78, #38a169)';
-    
-    setTimeout(() => {
-        button.textContent = originalText;
-        button.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
-    }, 1500);
-}
+  function showButtonFeedback(button) {
+  const originalText = button.textContent;
+  button.textContent = '✓ Selected!';
+  button.style.background = 'linear-gradient(135deg, #48bb78, #38a169)';
+
+  setTimeout(() => {
+  button.textContent = originalText;
+  button.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+  }, 1500);
+  }
 
 \end{code}
 
 
 \section*{6. Output / Screenshots}
 \begin{center}
-\includegraphics[width=\textwidth,height=8cm,keepaspectratio]{images/output1.png} 
-\includegraphics[width=0.7\textwidth, height=7cm, keepaspectratio]{images/output2.png}
-\includegraphics[width=\textwidth,height=8cm,keepaspectratio]{images/output3.png} 
+  \includegraphics[width=\textwidth,height=8cm,keepaspectratio]{images/output1.png}
+  \includegraphics[width=0.7\textwidth, height=7cm, keepaspectratio]{images/output2.png}
+  \includegraphics[width=\textwidth,height=8cm,keepaspectratio]{images/output3.png}
 
 \end{center}
 
