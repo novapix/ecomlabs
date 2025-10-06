@@ -47,11 +47,24 @@
   tabsize=2,
 }
 \lstdefinelanguage{CSS}{
-  morekeywords={color, background, font-size, margin, padding, border, float, width, height, text-align,overflow,position, object-fit, transition,box-shadow },
+  alsoletter=-,
+  morekeywords={
+    color, background, font-size, margin, padding, border, float,
+    width, height, text-align, overflow, position, object-fit,
+    transition, box-shadow, display, flex, grid, justify-content,
+    align-items, align-content, align-self, gap, row-gap, column-gap,
+    z-index, opacity, visibility, cursor, content, top, left, right, bottom,
+    border-radius, border-color, border-width, border-style, font-family,
+    font-weight, font-style, line-height, letter-spacing, word-spacing,
+    text-transform, text-decoration, background-color, background-image,
+    background-repeat, background-position, background-size, overflow-x,
+    overflow-y, min-width, max-width, min-height, max-height, font-weight
+  },
   sensitive=true,
   morecomment=[l]{//},
   morestring=[b]",
 }
+
 % Header and footer setup for all pages except cover
 \fancypagestyle{main}{
   \fancyhf{}
@@ -71,27 +84,25 @@ Affiliated to Tribhuvan University}
 \begin{document}
 % \date{August 17, 2025}
 
-
-% --------- Cover Page ---------
 \begin{titlepage}
-  \begin{center}
-    \vspace*{2cm}
-    \includegraphics[width=0.35\textwidth]{Kath.png} \\[2cm]
+    \begin{center}
+        \vspace*{2cm}
+        \includegraphics[width=0.35\textwidth]{Kath.png} \\[2cm]
 
-    {\Huge \bfseries Lab Report 1} \\[0.5cm]
-    {\Large HTML/CSS-based Product Catalog} \\[2cm]
+        {\Huge \bfseries Lab Report 1} \\[0.5cm]
+        {\Large HTML/CSS-based Product Catalog} \\[2cm]
 
-    {\Large \textbf{Course:} CSC381 - E-Commerce} \\[1cm]
-    {\Large \textbf{Submitted by:}} \\[0.3cm]
-    {\large Parakram Kharel \\ Roll No: 24} \\[2cm]
+        {\Large \textbf{Course:} CSC381 - E-Commerce} \\[1cm]
+        {\Large \textbf{Submitted by:}} \\[0.3cm]
+        {\large Parakram Kharel \\ Roll No: 24} \\[2cm]
 
-    \textit{Kathford International College of Engineering and Management} \\
-    Affiliated to Tribhuvan University \\[3cm]
-    
-    \date{August 17, 2025}
-    {\normalsize \@date}
-    % \today
-  \end{center}
+        \textit{Kathford International College of Engineering and Management} \\
+        Affiliated to Tribhuvan University \\[3cm]
+
+        \date{August 17, 2025}
+        {\normalsize \@date}
+        % \today
+    \end{center}
 \end{titlepage}
 
 \pagestyle{main}
@@ -103,14 +114,14 @@ To create and build a simple product catalog web page using HTML and CSS to disp
 
 \section*{2. Tools and Technologies Used}
 \begin{longtable}{ll}
-\toprule
-\textbf{Technology} & \textbf{Purpose} \\
-\midrule
-HTML5 & Structure and layout of the web page \\
-CSS3 & Styling and visual design \\
-VS Code & Code editor and development environment \\
-Web Browser & Rendering and testing output \\
-\bottomrule
+    \toprule
+    \textbf{Technology} & \textbf{Purpose}                        \\
+    \midrule
+    HTML5               & Structure and layout of the web page    \\
+    CSS3                & Styling and visual design               \\
+    VS Code             & Code editor and development environment \\
+    Web Browser         & Rendering and testing output            \\
+    \bottomrule
 \end{longtable}
 
 \section*{3. Theory / Background}
@@ -119,18 +130,18 @@ A product catalog page on an e-commerce site showcases the available products, f
 \section*{4. Page Layout Design}
 \subsection*{4.1 Catalog Page Structure}
 \begin{itemize}
-  \item Header (website title or logo)
-  \item Product grid with multiple product entries
-  \item Footer with contact or legal information
+    \item Header (website title or logo)
+    \item Product grid with multiple product entries
+    \item Footer with contact or legal information
 \end{itemize}
 
 \subsection*{4.2 Product Card Format}
 Each product listing contains:
 \begin{itemize}
-  \item Product Image
-  \item Product Title
-  \item Brief Description of Product
-  \item Price in NPR
+    \item Product Image
+    \item Product Title
+    \item Brief Description of Product
+    \item Price in NPR
 \end{itemize}
 
 \section*{5. Code Snippets}
@@ -204,6 +215,7 @@ Each product listing contains:
 \end{lstlisting}
 
 \subsection*{5.4 CSS Styling: Product Card}
+
 \begin{lstlisting}[language=CSS]
 .product-card {
     background: white;
@@ -229,6 +241,7 @@ Each product listing contains:
 \end{lstlisting}
 
 \subsection*{5.5 CSS Styling: Navbar}
+
 \begin{lstlisting}[language=CSS]
 .top-bar {
     background: rgba(255, 255, 255, 0.95);
@@ -305,7 +318,7 @@ Each product listing contains:
 
 \section*{6. Output / Screenshots}
 \begin{center}
-\includegraphics[width=\textwidth]{output.png} 
+    \includegraphics[width=\textwidth]{output.png}
 \end{center}
 
 \section*{7. Result}
@@ -317,9 +330,9 @@ This lab covered the basics of building an e-commerce interface, using HTML for 
 
 \section*{9. References}
 \begin{itemize}
-  \item \href{https://developer.mozilla.org/en-US/docs/Web}{MDN Web Docs}
-  \item \href{https://css-tricks.com}{CSS-Tricks}
-  \item \href{https://html.spec.whatwg.org/}{HTML Living Standard (WHATWG)}
-  \item \href{https://www.w3.org/TR/CSS/#css}{W3C - CSS Standards}
+    \item \href{https://developer.mozilla.org/en-US/docs/Web}{MDN Web Docs}
+    \item \href{https://css-tricks.com}{CSS-Tricks}
+    \item \href{https://html.spec.whatwg.org/}{HTML Living Standard (WHATWG)}
+    \item \href{https://www.w3.org/TR/CSS/#css}{W3C - CSS Standards}
 \end{itemize}
 \end{document}
